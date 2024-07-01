@@ -1,13 +1,13 @@
 from llama_index.core import VectorStoreIndex, Settings, SimpleDirectoryReader
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.openai import OpenAI
-from const import OPEN_AI_MODEL
+from const import OPEN_AI_MODEL, OPEN_AI_API_KEY
 
 
 def create_new_query_engine():
     documents = SimpleDirectoryReader("./dataset").load_data()
 
-    Settings.llm = OpenAI(model=OPEN_AI_MODEL)
+    Settings.llm = OpenAI(model=OPEN_AI_MODEL, api_key=OPEN_AI_API_KEY)
 
     # bge-base embedding model
     Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
