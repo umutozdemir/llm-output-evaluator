@@ -4,7 +4,7 @@ from deepeval.synthesizer import Synthesizer
 os.environ["OPENAI_API_KEY"] = "sk-proj-KPBo2qv14PNo64Vo31XBT3BlbkFJNPUOW9djeUNxsBjoH8z4"
 
 
-def generate_golden_dataset_deep_eval():
+def generate_golden_standard():
     # Get all file paths in the ./dataset directory
     document_paths = [os.path.join("./dataset", filename) for filename in os.listdir("./dataset") if
                       os.path.isfile(os.path.join("./dataset", filename))]
@@ -20,6 +20,3 @@ def generate_golden_dataset_deep_eval():
         file_type='json',
         directory="./synthetic_data",
     )
-
-
-generate_golden_dataset_deep_eval()
