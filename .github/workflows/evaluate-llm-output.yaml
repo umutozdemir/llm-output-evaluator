@@ -26,11 +26,11 @@ jobs:
 
       - name: Generate Golden Standard
         run: |
-          python generate_golden_standard.py
+          python -W ignore generate_golden_standard.py
 
       - name: Generate and Evaluate LLM Output
         run: |
-          python evaluate_llm_output.py
+          python -W ignore evaluate_llm_output.py
 
       - name: Save evaluation results
         run: |

@@ -90,7 +90,7 @@ class Evaluator:
             })
             scores.append(field_score)
 
-        results_json = json.dumps(self.results)
+        results_json = json.dumps(self.results, indent=4)
         self.save_results('evaluation_results.json', results_json)
 
         return scores
