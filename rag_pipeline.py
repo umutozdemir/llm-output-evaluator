@@ -23,9 +23,10 @@ def create_new_query_engine():
     return query_engine
 
 
-def get_query_responses(queries, query_engine):
+def get_responses_from_llm(queries, query_engine):
     responses = {}
     for query in queries:
         response = query_engine.query(query)
-        responses[query] = response
+        responses[query] = {"answer": response.response,
+                            "retrieval_context": [node.get_content() for node in response.source_nodes]}
     return responses

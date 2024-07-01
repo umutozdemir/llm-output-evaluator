@@ -1,4 +1,4 @@
-deepeval~=0.21.60
+deepeval~=0.21.62
 langchain~=0.2.5
 transformers~=4.41.2
 bs4~=0.0.2

@@ -22,7 +22,6 @@ def parse_synthetic_data_to_dict(synthetic_data_folder):
     for item in data:
         input_text = item['input']
         parsed_dict[input_text] = {
-            'actual_output': item['actual_output'],
             'expected_output': item['expected_output'],
             'context': item['context'],
             'source_file': item['source_file']
