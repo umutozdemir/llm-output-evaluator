@@ -13,6 +13,7 @@ def generate_golden_dataset_deep_eval():
     synthesizer.generate_goldens_from_docs(
         document_paths=document_paths,
         max_goldens_per_document=5,
+        include_expected_output=True
     )
 
     synthesizer.save_as(
