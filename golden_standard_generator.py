@@ -1,7 +1,9 @@
 import os
 from deepeval.synthesizer import Synthesizer
 
-os.environ["OPENAI_API_KEY"] = "sk-proj-KPBo2qv14PNo64Vo31XBT3BlbkFJNPUOW9djeUNxsBjoH8z4"
+from const import OPEN_AI_MODEL, OPEN_AI_API_KEY
+
+os.environ["OPENAI_API_KEY"] = OPEN_AI_API_KEY
 
 
 def generate_golden_standard():
@@ -9,7 +11,7 @@ def generate_golden_standard():
     document_paths = [os.path.join("./dataset", filename) for filename in os.listdir("./dataset") if
                       os.path.isfile(os.path.join("./dataset", filename))]
 
-    synthesizer = Synthesizer(model="gpt-3.5-turbo")
+    synthesizer = Synthesizer(model=OPEN_AI_MODEL)
     synthesizer.generate_goldens_from_docs(
         document_paths=document_paths,
         max_goldens_per_document=5,

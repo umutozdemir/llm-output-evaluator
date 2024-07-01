@@ -4,7 +4,7 @@ from rag_pipeline import create_new_query_engine, get_query_responses
 
 if __name__ == '__main__':
     # First step: Generate golden standard.
-    generate_golden_standard()
+    # generate_golden_standard()
 
     # Second step: Read golden standard.
     queries = parse_synthetic_data_to_dict("./synthetic_data")

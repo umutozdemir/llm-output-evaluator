@@ -1,13 +1,16 @@
 from deepeval.test_case import LLMTestCase
 from deepeval.metrics import AnswerRelevancyMetric
 
+from const import OPEN_AI_MODEL
+
 
 class Evaluator:
-    def evaluate_answer_relevancy(self, input, actual_output):
-        answer_relevancy_metric = AnswerRelevancyMetric(threshold=0.5, model='gpt-3.5-turbo')
+    def __init__(self, threshold=0.5, model=OPEN_AI_MODEL):
+        self.answer_relevancy_metric = AnswerRelevancyMetric(threshold=threshold, model=model)
+
+    def evaluate_answer_relevancy(self, input_text, actual_output):
         test_case = LLMTestCase(
-            input=input,
-            # Replace this with the actual output of your LLM application
+            input=input_text,
             actual_output=actual_output
         )
-        return answer_relevancy_metric
+        return self.answer_relevancy_metric

@@ -24,4 +24,8 @@ def create_new_query_engine():
 
 
 def get_query_responses(queries, query_engine):
-    return
+    responses = {}
+    for query in queries:
+        response = query_engine.query(query)
+        responses[query] = response
+    return responses
