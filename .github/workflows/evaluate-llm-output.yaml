@@ -8,6 +8,10 @@ on:
 jobs:
   run-scripts:
     runs-on: ubuntu-latest  # Use the latest Ubuntu operating system
+
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
