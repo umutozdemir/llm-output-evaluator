@@ -1,0 +1,7 @@
+deepeval~=0.21.60
+langchain~=0.2.5
+transformers~=4.41.2
+bs4~=0.0.2
+beautifulsoup4~=4.12.3
+numpy~=1.26.4
+scikit-learn~=1.5.0
