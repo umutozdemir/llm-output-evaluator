@@ -89,7 +89,7 @@ class Evaluator:
                 "reason": reason
             })
             scores.append(field_score)
-
+        print(self.results)
         results_json = json.dumps(self.results, indent=4)
         self.save_results('evaluation_results.json', results_json)
 
@@ -104,5 +104,4 @@ class Evaluator:
     @staticmethod
     def save_results(file_path, results):
         with open(file_path, 'w') as f:
-            for result in results:
-                f.write(json.dumps(result) + "\n")
+            f.write(results)
