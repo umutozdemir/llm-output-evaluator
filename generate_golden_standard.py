@@ -1,9 +1,7 @@
 import os
 from deepeval.synthesizer import Synthesizer
 
-from const import OPEN_AI_MODEL, OPEN_AI_API_KEY
-
-os.environ["OPENAI_API_KEY"] = OPEN_AI_API_KEY
+from const import OPEN_AI_MODEL
 
 
 def generate_golden_standard():
