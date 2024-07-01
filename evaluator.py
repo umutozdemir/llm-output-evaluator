@@ -1,6 +1,7 @@
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import (AnswerRelevancyMetric, HallucinationMetric, FaithfulnessMetric, GEval,
                               ContextualPrecisionMetric, ContextualRecallMetric, ContextualRelevancyMetric)
+from tabulate import tabulate
 
 from const import OPEN_AI_MODEL
 
@@ -57,22 +58,19 @@ class Evaluator:
 
     def evaluate_output(self):
         answer_relevancy = self.evaluate_answer_relevancy()
-        print(answer_relevancy)
-
         hallucination = self.evaluate_hallucination()
-        print(hallucination)
-
         correctness = self.evaluate_correctness()
-        print(correctness)
-
         faithfulness = self.evaluate_faithfulness()
-        print(faithfulness)
-
         contextual_precision = self.evaluate_contextual_precision_metric()
-        print(contextual_precision)
-
         contextual_recall = self.evaluate_contextual_recall_metric()
-        print(contextual_recall)
-
         contextual_relevancy = self.evaluate_contextual_relevancy_metric()
-        print(contextual_relevancy)
+
+        scores = [
+            ["Input", "Answer Relevancy", "Hallucination", "Correctness", "Faithfulness", "Contextual Precision",
+             "Contextual Recall", "Contextual Relevancy"],
+            [self.LLMTestCase.input, answer_relevancy, hallucination, correctness, faithfulness, contextual_precision, contextual_recall,
+             contextual_relevancy]
+        ]
+
+        # Print the scores as a table
+        print(tabulate(scores, headers="firstrow", tablefmt="grid"))
