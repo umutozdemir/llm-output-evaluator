@@ -1,0 +1,29 @@
+name: Evaluate LLM Output
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu operating system
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2  # Set up Python environment
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Golden Standard
+        run: |
+          python generate_golden_standard.py
+
+      - name: Generate and Evaluate LLM Output
+        run: |
+          python evaluate_llm_output.py

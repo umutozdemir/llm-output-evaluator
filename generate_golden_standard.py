@@ -22,3 +22,6 @@ def generate_golden_standard():
         file_type='json',
         directory="./synthetic_data",
     )
+
+
+generate_golden_standard()
