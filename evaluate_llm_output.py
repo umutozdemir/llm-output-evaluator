@@ -16,12 +16,32 @@ def generate_llm_outputs():
 
 
 def evaluate_llm_output(queries, responses):
+    sum_of_metric_scores = [
+        ("Answer Relevancy", 0),
+        ("Hallucination", 0),
+        ("Correctness", 0),
+        ("Faithfulness", 0),
+        ("Contextual Precision", 0),
+        ("Contextual Recall", 0),
+        ("Contextual Relevancy", 0)
+    ]
+
     for query in queries:
         response = responses.get(query)
         evaluator = Evaluator(query, response.get('answer'), queries.get(query).get("expected_output"),
                               queries.get(query).get("context"), response.get('retrieval_context'))
 
-        evaluator.evaluate_output()
+        scores = evaluator.evaluate_output()
+
+        for i, (field_name, score) in enumerate(sum_of_metric_scores):
+            sum_of_metric_scores[i] = (field_name, score + scores[i])
+
+    average_scores = [(field_name, score / len(queries)) for field_name, score in sum_of_metric_scores]
+
+    # Print the average scores
+    print("Average Scores:")
+    for field_name, average_score in average_scores:
+        print(f"{field_name}: {average_score:.2f}")
 
 
 generate_llm_outputs()

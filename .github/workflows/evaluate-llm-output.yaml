@@ -31,3 +31,14 @@ jobs:
       - name: Generate and Evaluate LLM Output
         run: |
           python evaluate_llm_output.py
+
+      - name: Save evaluation results
+        run: |
+          cat evaluation_results.json
+        if: always()  # Ensures this step runs even if previous steps fail
+
+      - name: Upload evaluation results
+        uses: actions/upload-artifact@v2
+        with:
+          name: evaluation-results
+          path: evaluation_results.json
