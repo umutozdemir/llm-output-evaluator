@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu operating system
 
     env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_API_KEY: sk-proj-KPBo2qv14PNo64Vo31XBT3BlbkFJNPUOW9djeUNxsBjoH8z4
 
     steps:
       - name: Checkout repository
@@ -21,7 +21,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          echo "MY_ENV_VAR is ${{ secrets.OPENAI_API_KEY }}"
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
