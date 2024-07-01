@@ -2,6 +2,7 @@ from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import (AnswerRelevancyMetric, HallucinationMetric, FaithfulnessMetric, GEval,
                               ContextualPrecisionMetric, ContextualRecallMetric, ContextualRelevancyMetric)
 from tabulate import tabulate
+from textwrap import shorten
 
 from const import OPEN_AI_MODEL
 
@@ -65,12 +66,23 @@ class Evaluator:
         contextual_recall = self.evaluate_contextual_recall_metric()
         contextual_relevancy = self.evaluate_contextual_relevancy_metric()
 
-        scores = [
-            ["Input", "Answer Relevancy", "Hallucination", "Correctness", "Faithfulness", "Contextual Precision",
-             "Contextual Recall", "Contextual Relevancy"],
-            [self.LLMTestCase.input, answer_relevancy, hallucination, correctness, faithfulness, contextual_precision, contextual_recall,
-             contextual_relevancy]
-        ]
+        input_summary = shorten(self.LLMTestCase.input, width=30, placeholder="...")
 
-        # Print the scores as a table
-        print(tabulate(scores, headers="firstrow", tablefmt="grid"))
+        # Prepare the scores for printing
+        headers = ["Input", "Answer Relevancy", "Hallucination", "Correctness", "Faithfulness",
+                   "Contextual Precision", "Contextual Recall", "Contextual Relevancy"]
+        scores = [input_summary, answer_relevancy, hallucination, correctness, faithfulness,
+                  contextual_precision, contextual_recall, contextual_relevancy]
+
+        # Calculate column widths for alignment
+        column_widths = [max(len(str(item)) for item in col) for col in zip(headers, scores)]
+        column_widths = [min(width, 15) for width in column_widths]  # Limit max column width
+
+        # Format header
+        header_row = " | ".join(f"{headers[i]:<{column_widths[i]}}" for i in range(len(headers)))
+        print(header_row)
+        print("-" * len(header_row))
+
+        # Format scores
+        score_row = " | ".join(f"{str(scores[i]):<{column_widths[i]}}" for i in range(len(scores)))
+        print(score_row)
