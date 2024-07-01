@@ -181,4 +181,4 @@ yarl==1.9.4
 zipp==3.19.2
 zstandard==0.22.0
 llama-index-embeddings-huggingface==0.2.2
-llama-index-llms-ollama==0.1.5
+llama-index-llms-openai==0.1.24
